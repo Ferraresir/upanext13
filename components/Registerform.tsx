@@ -34,12 +34,17 @@ export default function Form() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            nombre: e.currentTarget.nombre.value,
-            apellido: e.currentTarget.apellido.value,
-            sectorId: e.currentTarget.password.value,
-            rol: e.currentTarget.rol.value,
-            user: nombre + apellido,
-            password: e.currentTarget.password.value,
+            nombre: e.currentTarget.nombre.value.toUpperCase(),
+            apellido: e.currentTarget.apellido.value.toUpperCase(),
+            sectorId: parseInt(e.currentTarget.sector.value),
+            role: e.currentTarget.rol.value,
+            user: (
+              e.currentTarget.apellido.value.slice(0, 1)+
+              e.currentTarget.nombre.value.slice(0, 4) 
+            ).toUpperCase(),
+            password: (
+              e.currentTarget.apellido.value.slice(0, 3) + "123"
+            ).toUpperCase(),
           }),
         }).then(async (res) => {
           setLoading(false);
@@ -67,7 +72,7 @@ export default function Form() {
           name="nombre"
           type="text"
           required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-1 uppercase block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
       <div>
@@ -82,7 +87,7 @@ export default function Form() {
           name="apellido"
           type="text"
           required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-1 uppercase block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
       <div className="flex justify-center w-full">
@@ -99,10 +104,8 @@ export default function Form() {
             required
             className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
           >
-            {loading
-              ? console.log("chori")
-              : console.log("ready")
-                }
+            <option value={2}>Informatica</option>
+            <option value={3}>Farmacia</option>
           </select>
         </div>
         <div className="w-1/2 ml-2">
@@ -118,8 +121,8 @@ export default function Form() {
             required
             className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
           >
-            <option>Usuario</option>
-            <option>Admin</option>
+            <option value="usuario">Usuario</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
       </div>

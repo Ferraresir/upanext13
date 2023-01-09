@@ -17,8 +17,8 @@ export default function Form() {
         setLoading(true);
         signIn("credentials", {
           redirect: false,
-          user: e.currentTarget.user.value,
-          password: e.currentTarget.password.value,
+          user: e.currentTarget.user.value.toUpperCase(),
+          password: e.currentTarget.password.value.toUpperCase(),
           // @ts-ignore
         }).then(({ ok, error }) => {
           setLoading(false);
@@ -43,7 +43,7 @@ export default function Form() {
           name="user"
           type="text"
           required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-1 uppercase block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
       <div>
@@ -58,7 +58,7 @@ export default function Form() {
           name="password"
           type="password"
           required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-1 uppercase block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />
       </div>
       <button

@@ -14,7 +14,7 @@ export default NextAuth({
           password: string;
         };
         if (!user || !password) {
-          throw new Error("Missing username or password");
+          throw new Error("Complete los campos");
         }
         const usuario = await prisma.user.findUnique({
           where: {
@@ -23,7 +23,7 @@ export default NextAuth({
         });
         // if user doesn't exist or password doesn't match
         if (!usuario || !(await compare(password, usuario.password))) {
-          throw new Error("Invalid username or password");
+          throw new Error("Usuario o Contraseña incorrectos");
         }
         return usuario;
       },
