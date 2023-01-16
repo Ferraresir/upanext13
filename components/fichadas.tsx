@@ -11,38 +11,44 @@ export default function Fichadas() {
     setLoading(true);
     let data = await fetch("/api/fichada");
     let json = await data.json();
-    await json.sort((a:any,b:any) => a - b)
+    await json.sort((a: any, b: any) => a.apellido - b.apellido);
     setData(json);
     setLoading(false);
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-red-300">
+    <div className="w-screen h-screen flex justify-center items-center bg-white">
       {loading ? (
         <p className="text-lg font-semibold">
           Cargando <LoadingDots />
         </p>
       ) : (
-        <table className="w-1/2 h-40 overflow-scroll">
-            <tr>
-                <th>Apellido</th>
-                <th>Nobre</th>
-                <th>Entrada</th>
-                <th>Salida</th>
-                <th>Horas</th>
-            </tr>
-          {data.map((e: any, i:number) => {
-            return (
-              <tr key={i}>
-                <td>{e.Apellido}</td>
-                <td>{e.Nombre}</td>
-                <td>{e.Entrada}</td>
-                <td>{e.Salida}</td>
-                <td>{e.Horas}</td>
+        <div className="w-1/2 h-40 overflow-scroll">
+          <table className="w-full text-center table-auto border border-collapse border-spacing-2">
+            <thead className="sticky top-0">
+              <tr>
+                <th className="border">Apellido</th>
+                <th className="border">Nobre</th>
+                <th className="border">Entrada</th>
+                <th className="border">Salida</th>
+                <th className="border">Horas</th>
               </tr>
-            );
-          })}
-        </table>
+            </thead>
+            <tbody>
+              {data.map((e: any, i: number) => {
+                return (
+                  <tr key={i}>
+                    <td className="border">{e.Apellido}</td>
+                    <td className="border">{e.Nombre}</td>
+                    <td className="border">{e.Entrada}</td>
+                    <td className="border">{e.Salida}</td>
+                    <td className="border">{e.Horas}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       )}
       <button
         onClick={() => {
